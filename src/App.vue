@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <Toolbar />
-    <RestaurantList v-bind:restaurants="restaurants" />
+    <div id="mainArea">
+      <RestaurantList v-bind:restaurants="restaurants" />
+    </div>
   </div>
 </template>
 
@@ -66,7 +68,44 @@ export default {
 }
 body {
   font-family: "Segoe UI", Tahoma, Verdana, Arial, sans-serif;
+  font-size: 14px;
   color: white;
   background-color: #010c1f;
+  box-sizing: border-box;
+  height: 100vh;
+}
+
+#app {
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+#mainArea {
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+button {
+  font-family: "Segoe UI", Tahoma, Verdana, Arial, sans-serif;
+  background: rgba(255, 255, 255, 0);
+  transition: background 0.2s;
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 1em;
+}
+
+button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+button:active {
+  background: rgba(0, 0, 0, 0.2);
+}
+button:focus {
+  outline: none;
 }
 </style>

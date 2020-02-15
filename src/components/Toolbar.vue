@@ -24,32 +24,14 @@ export default {
 <style scoped>
 #toolbar {
   background: #3d77f5;
+  flex-direction: row;
   display: flex;
 }
 img {
-  height: 1.5em;
+  height: 1.3em;
   margin-right: 0.5em;
 }
 button {
-  font-family: "Segoe UI", Tahoma, Verdana, Arial, sans-serif;
-  background: #3d77f5;
-  transition: background 0.2s;
-  border: none;
-  color: white;
-  display: flex;
-  align-items: center;
-  padding: 1em;
   margin: 0 0.5em;
-}
-button:hover {
-  background: #4c94ff;
-}
-
-button:active {
-  background: #2d59b7;
-}
-
-button:focus {
-  outline: none;
 }
 </style>

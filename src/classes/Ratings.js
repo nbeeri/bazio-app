@@ -10,6 +10,6 @@ export default class Ratings {
         return [this.food/divisor, this.service/divisor, this.value/divisor, this.ambience/divisor, (this.bonus*bonusMultiplier)/divisor]
     }
     getFinalRating(){
-        return (this.food + this.service + this.value + this.ambience + this.bonus);
+        return (this.food + this.service + this.value + this.ambience + this.bonus)/5;
     }
 }

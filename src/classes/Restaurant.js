@@ -1,8 +1,8 @@
-import uuid from "uuid";
+const uuidv1 = require("uuid/v1");
 import Ratings from "../classes/Ratings.js";
 export default class Restaurant {
     constructor(name, category, address, reviewDate, reviewTime, price, comment, ratings1, ratings2) {
-        this.id = uuid.v1();
+        this.id = uuidv1();
         this.name = name;
         this.category = category;
         this.address = address;
@@ -26,7 +26,7 @@ export default class Restaurant {
             results[i] = values1[i] + values2[i];
         }
         this.computedRatings = new Ratings(...results);
-        this.finalRating = this.computedRatings.getFinalRating;
+        this.finalRating = this.computedRatings.getFinalRating();
     }
     updateLastEdited(){
         this.lastEdited = new Date();
