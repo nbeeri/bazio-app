@@ -40,17 +40,17 @@ export default {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #031F50;
+  background: #E6E6E6;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #214494;
+  background: #B8B8B8;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #5477C7;
+  background: #8A8A8A;
 }
 
 </style>

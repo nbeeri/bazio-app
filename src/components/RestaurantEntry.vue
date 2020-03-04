@@ -38,9 +38,7 @@ export default {
   display: flex;
   align-items: stretch;
 }
-.restaurantDesc {
-  color: #3d77f5;
-}
+
 .left {
   flex-grow: 0;
 }
@@ -50,5 +48,6 @@ export default {
 }
 .restaurantTitle {
   font-weight: bold;
+  color: #2A56B9;
 }
 </style>

@@ -16,7 +16,7 @@ protocol.registerSchemesAsPrivileged([{scheme: 'app', privileges: { secure: true
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({ width: 900, minWidth: 900, height: 600, minHeight: 600, backgroundColor: "#010c1f", webPreferences: {
+  win = new BrowserWindow({ width: 900, minWidth: 900, height: 600, minHeight: 600, webPreferences: {
     nodeIntegration: true
   } })
 

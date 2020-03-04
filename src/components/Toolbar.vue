@@ -1,16 +1,16 @@
 <template>
   <div id="toolbar">
     <button>
-      <img class="toolIcon" src="../assets/icons/NewFile.svg" alt />Neu
+      <img src="../assets/icons/NewFile.svg" alt />Neu
     </button>
     <button>
-      <img class="toolIcon" src="../assets/icons/SaveFile.svg" alt />Speichern
+      <img src="../assets/icons/SaveFile.svg" alt />Speichern
     </button>
     <button>
-      <img class="toolIcon" src="../assets/icons/SaveAsNewFile.svg" alt />Speichern unter...
+      <img src="../assets/icons/SaveAsNewFile.svg" alt />Speichern unter...
     </button>
     <button>
-      <img class="toolIcon" src="../assets/icons/LoadFile.svg" alt />Öffnen
+      <img src="../assets/icons/LoadFile.svg" alt />Öffnen
     </button>
   </div>
 </template>

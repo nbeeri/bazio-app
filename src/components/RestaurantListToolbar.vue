@@ -1,10 +1,10 @@
 <template>
   <div id="RestaurantListToolbar">
     <button>
-      <img class="toolIcon" src="../assets/icons/Add.svg" alt />Hinzufügen
+      <img src="../assets/icons/Add.svg" alt />Hinzufügen
     </button>
     <button>
-      <img class="toolIcon" src="../assets/icons/Sort.svg" alt />Sortieren
+      <img src="../assets/icons/Sort.svg" alt />Sortieren
     </button>
   </div>
 </template>
