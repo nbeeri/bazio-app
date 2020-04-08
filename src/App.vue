@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Toolbar />
+    <Toolbar v-on:save-file-as-new="saveFileAsNew" v-on:load-file="loadRestaurantFile" />
     <div id="mainArea">
       <RestaurantList v-bind:restaurants="restaurants" />
       <Editor />
@@ -9,11 +9,13 @@
 </template>
 
 <script>
-import Restaurant from "./classes/Restaurant.js";
-import Ratings from "./classes/Ratings.js";
+import Restaurant from "./classes/Restaurant";
+import Ratings from "./classes/Ratings";
 import Toolbar from "./components/Toolbar";
 import RestaurantList from "./components/RestaurantList";
 import Editor from "./components/Editor";
+import {saveFile, loadFile} from "./classes/FileManager.js";
+
 export default {
   name: "App",
   components: {
@@ -93,6 +95,17 @@ export default {
         )
       ]
     };
+  },
+  methods: {
+    saveFileAsNew() {
+      saveFile(this.restaurants);
+    },
+    loadRestaurantFile(){
+      loadFile().then((newData) => {
+        this.restaurants[0] = newData[0];
+        console.log(newData);
+        });
+    }
   }
 };
 </script>
@@ -130,7 +143,7 @@ body {
 button {
   font-family: "Segoe UI", Tahoma, Verdana, Arial, sans-serif;
   background: rgba(255, 255, 255, 0);
-  transition: background 0.2s;
+  transition: background-color 0.2s;
   border: none;
   color: white;
   display: flex;
