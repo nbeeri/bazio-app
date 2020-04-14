@@ -2,7 +2,10 @@
   <div id="RestaurantList">
     <RestaurantListToolbar />
     <div id="ListArea">
-      <RestaurantEntry v-bind:key="restaurant.id" v-for="restaurant in restaurants" v-bind:restaurant="restaurant" />
+      <div v-bind:key="restaurant.id" v-for="restaurant in restaurants">
+        <RestaurantEntry v-bind:restaurant="restaurant" />
+      </div>
+      
     </div>
     
   </div>

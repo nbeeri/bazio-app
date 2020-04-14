@@ -102,8 +102,7 @@ export default {
     },
     loadRestaurantFile(){
       loadFile().then((newData) => {
-        this.restaurants[0] = newData[0];
-        console.log(newData);
+        this.restaurants = newData;
         });
     }
   }
