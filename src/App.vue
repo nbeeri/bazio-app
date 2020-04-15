@@ -2,8 +2,8 @@
   <div id="app">
     <Toolbar v-on:save-file-as-new="saveFileAsNew" v-on:load-file="loadRestaurantFile" />
     <div id="mainArea">
-      <RestaurantList v-bind:restaurants="restaurants" />
-      <Editor />
+      <RestaurantList v-bind:restaurants="restaurants" @restaurant-selected="selectRestaurant"/>
+      <Editor v-bind:selectedRestaurant="selectedRestaurant"/>
     </div>
   </div>
 </template>
@@ -58,42 +58,9 @@ export default {
           "Macht auf Etepetete, aber wenig dahinter.",
           new Ratings(5, 4, 3, 4, 0),
           new Ratings(4, 3, 4, 5, 0)
-        ),
-
-        new Restaurant(
-          "Das Restaurant",
-          "Gutbürgerlich",
-          "Musterstraße 1",
-          new Date(2019, 10, 25),
-          2,
-          2,
-          "Ganz geil hier",
-          new Ratings(9, 7, 8, 9, 0),
-          new Ratings(10, 8, 9, 8, 1)
-        ),
-        new Restaurant(
-          "Da Romeo",
-          "Pizzeria",
-          "Beispielweg 2, 1234 Innsbruck",
-          new Date(2019, 9, 13),
-          2,
-          2,
-          "Ein rundes Angebot",
-          new Ratings(7, 7, 8, 6, 1),
-          new Ratings(8, 7, 7, 6, 2)
-        ),
-        new Restaurant(
-          "Adler",
-          "Deutsch",
-          "Hauptstraße 10, 75365 Calw-Stammheim",
-          new Date(2019, 9, 26),
-          2,
-          4,
-          "Macht auf Etepetete, aber wenig dahinter.",
-          new Ratings(5, 4, 3, 4, 0),
-          new Ratings(4, 3, 4, 5, 0)
         )
-      ]
+      ],
+      selectedRestaurant: null
     };
   },
   methods: {
@@ -104,6 +71,9 @@ export default {
       loadFile().then((newData) => {
         this.restaurants = newData;
         });
+    },
+    selectRestaurant(id){
+      this.selectedRestaurant = this.restaurants.filter(restaurant => restaurant.id == id)[0];
     }
   }
 };

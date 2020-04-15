@@ -5,19 +5,19 @@
         <img src="../assets/icons/Delete.svg" alt />Löschen
       </button>
     </div>
-    <div id="EditorMainArea">
+    <div v-if="selectedRestaurant" id="EditorMainArea">
       <div id="RestaurantMeta"></div>
-      <label for="Category">Name</label>
+      <label for="name">Name</label>
       <div class="formRow">
-        <input type="text" id="name" />
+        <input v-model="selectedRestaurant.name" type="text" id="name" />
       </div>
       <div class="formRow">
         <label for="Category">Kategorie</label>
-        <input type="text" id="Category" />
+        <input v-model="selectedRestaurant.category" type="text" id="Category" />
       </div>
       <div class="formRow">
         <label for="Address">Adresse</label>
-        <input type="text" id="Address" />
+        <input v-model="selectedRestaurant.address" type="text" id="Address" />
       </div>
       <div class="formRow">
         <label for="Date">Getestet am</label>
@@ -31,12 +31,14 @@
       </div>
       <div id="RestaurantRatings"></div>
     </div>
+    <div v-else> Wähle ein Restaurant auf der linken Seite aus, erstelle ein neues, oder lade eine bestehende Datei.</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Editor"
+  name: "Editor",
+  props: ["selectedRestaurant"]
 };
 </script>
 

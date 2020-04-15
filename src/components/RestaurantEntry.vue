@@ -1,5 +1,5 @@
 <template>
-  <div class="restaurantEntry">
+  <div @click="selectRestaurant" class="restaurantEntry">
     <p class="restaurantTitle">{{restaurant.name}}</p>
     <div class="entryInfo">
       <div class="left">
@@ -7,8 +7,8 @@
         <p class="restaurantDesc">{{restaurant.finalRating | round}} Punkte</p>
       </div>
       <div class="right">
-        <p class="restaurantDesc">Getestet am {{restaurant.reviewDate.toLocaleDateString()}}</p>
-        <p class="restaurantDesc">Bearbeitet am {{restaurant.lastEdited.toLocaleDateString()}}</p>
+        <p class="restaurantDesc">Getestet am WIP</p>
+        <p class="restaurantDesc">Bearbeitet am WIP</p>
       </div>
     </div>
   </div>
@@ -18,6 +18,11 @@
 export default {
   name: "RestaurantEntry",
   props: ["restaurant"],
+  methods: {
+    selectRestaurant(){
+      this.$emit("restaurant-selected", this.restaurant.id);
+    }
+  },
   filters: {
   round: function (value) {
     return value.toFixed(1);
