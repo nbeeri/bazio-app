@@ -4,7 +4,7 @@
     <div class="entryInfo">
       <div class="left">
         <p class="restaurantDesc">{{restaurant.category}}</p>
-        <p class="restaurantDesc">{{restaurant.finalRating | round}} Punkte</p>
+        <p class="restaurantDesc">{{restaurant.resultingRatings.finalRating | round}} Punkte</p>
       </div>
       <div class="right">
         <p class="restaurantDesc">Getestet am WIP</p>

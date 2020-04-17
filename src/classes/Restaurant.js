@@ -3,32 +3,51 @@ import Ratings from "../classes/Ratings.js";
 export default class Restaurant {
     constructor(name, category, address, reviewDate, reviewTime, price, comment, ratings1, ratings2) {
         this.id = uuidv1();
-        this.name = name;
+        this.name = (name) ? name : "Neues Restaurant";
         this.category = category;
         this.address = address;
         this.reviewDate = reviewDate;
         this.reviewTime = reviewTime;
         this.price = price;
         this.comment = comment;
-        this.ratings1 = ratings1;
-        this.ratings2 = ratings2;
+        this.ratings1 = (ratings1) ? ratings1 : new Ratings();
+        this.ratings2 = (ratings2) ? ratings2 : new Ratings();
+        this.resultingRatings = this.getResultingRatings();
         this.lastEdited = new Date();
-        this.updateRatings();
+    }
 
+    unpackLoadedRestaurant(loadedRestaurant) {
+        this.id = loadedRestaurant.id;
+        this.name = loadedRestaurant.name;
+        this.category = loadedRestaurant.category;
+        this.address = loadedRestaurant.adress;
+        this.reviewDate = loadedRestaurant.reviewDate;
+        this.reviewTime = loadedRestaurant.reviewTime;
+        this.price = loadedRestaurant.price;
+        this.comment = loadedRestaurant.comment;
+        this.ratings1 = loadedRestaurant.ratings1;
+        this.ratings2 = loadedRestaurant.ratings2;
+        this.resultingRatings = this.getResultingRatings();
+        this.lastEdited = new Date(loadedRestaurant.lastEdited);
     }
-    updateRatings() {
-        const divisor = 2 // = number or reviewers
-        const bonusMultiplier = 0.2;
-        let values1 = this.ratings1.getComputedValues(divisor, bonusMultiplier);
-        let values2 = this.ratings2.getComputedValues(divisor, bonusMultiplier);
-        let results = [];
-        for (let i = 0; i < values1.length; i++) {
-            results[i] = values1[i] + values2[i];
+
+    getResultingRatings() {
+        var ratingValues1 = Object.values(this.ratings1);
+        var ratingValues2 = Object.values(this.ratings2);
+        var valueSums = [];
+        for (var i = 0; i < ratingValues1.length; i++) {
+            valueSums[i] = ratingValues1[i] + ratingValues2[i];
         }
-        this.computedRatings = new Ratings(...results);
-        this.finalRating = this.computedRatings.getFinalRating();
+
+        var finalRatings = new Ratings(...valueSums);
+        finalRatings.applyBonusMultiplier();
+
+        finalRatings.calculateTotalPoints();
+
+        return finalRatings;
     }
-    updateLastEdited(){
+    updateLastEdited() {
         this.lastEdited = new Date();
     }
 }
+

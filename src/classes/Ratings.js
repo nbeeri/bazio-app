@@ -1,15 +1,17 @@
+const BONUS_MULTIPLIER = 0.2;
 export default class Ratings {
-    constructor(food, service, value, ambience, bonus){
+    constructor(food = 0, service = 0, value = 0, ambience = 0, bonus = 0) {
         this.food = Number(food);
         this.service = Number(service);
         this.value = Number(value);
         this.ambience = Number(ambience);
         this.bonus = Number(bonus);
     }
-    getComputedValues(divisor, bonusMultiplier){
-        return [this.food/divisor, this.service/divisor, this.value/divisor, this.ambience/divisor, (this.bonus*bonusMultiplier)/divisor]
+    applyBonusMultiplier() {
+        this.bonus *= BONUS_MULTIPLIER;
     }
-    getFinalRating(){
-        return (this.food + this.service + this.value + this.ambience + this.bonus)/5;
+    calculateTotalPoints() {
+        var totalPoints = this.food + this.service + this.value + this.ambience + this.bonus;
+        this.finalRating = totalPoints;
     }
 }

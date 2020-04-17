@@ -1,6 +1,6 @@
 <template>
   <div id="RestaurantListToolbar">
-    <button>
+    <button @click="addRestaurant">
       <img src="../assets/icons/Add.svg" alt />Hinzufügen
     </button>
     <button>
@@ -11,7 +11,14 @@
 
 <script>
 export default {
-  name: "RestaurantListToolbar"
+  name: "RestaurantListToolbar",
+  methods: {
+    addRestaurant(){
+      console.log("(1)Emitting from RestaurantListToolbar.")
+      this.$emit("add-restaurant");
+      console.log("(2)Emitted from RestaurantListToolbar.")
+    }
+  }
 };
 </script>
 

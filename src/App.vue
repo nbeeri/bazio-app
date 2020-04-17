@@ -2,19 +2,19 @@
   <div id="app">
     <Toolbar v-on:save-file-as-new="saveFileAsNew" v-on:load-file="loadRestaurantFile" />
     <div id="mainArea">
-      <RestaurantList v-bind:restaurants="restaurants" @restaurant-selected="selectRestaurant"/>
-      <Editor v-bind:selectedRestaurant="selectedRestaurant"/>
+      <RestaurantList v-bind:restaurants="restaurants" @restaurant-selected="selectRestaurant" @add-restaurant="addRestaurant"/>
+      <Editor v-bind:selectedRestaurant="selectedRestaurant" />
     </div>
   </div>
 </template>
 
 <script>
 import Restaurant from "./classes/Restaurant";
-import Ratings from "./classes/Ratings";
+//import Ratings from "./classes/Ratings";
 import Toolbar from "./components/Toolbar";
 import RestaurantList from "./components/RestaurantList";
 import Editor from "./components/Editor";
-import {saveFile, loadFile} from "./classes/FileManager.js";
+import { saveFile, loadFile } from "./classes/FileManager.js";
 
 export default {
   name: "App",
@@ -25,41 +25,7 @@ export default {
   },
   data() {
     return {
-      restaurants: [
-        new Restaurant(
-          "Das Restaurant",
-          "Gutbürgerlich",
-          "Musterstraße 1",
-          new Date(2019, 10, 25),
-          2,
-          2,
-          "Ganz geil hier",
-          new Ratings(9, 7, 8, 9, 0),
-          new Ratings(10, 8, 9, 8, 1)
-        ),
-        new Restaurant(
-          "Da Romeo",
-          "Pizzeria",
-          "Beispielweg 2, 1234 Innsbruck",
-          new Date(2019, 9, 13),
-          2,
-          2,
-          "Ein rundes Angebot",
-          new Ratings(7, 7, 8, 6, 1),
-          new Ratings(8, 7, 7, 6, 2)
-        ),
-        new Restaurant(
-          "Adler",
-          "Deutsch",
-          "Hauptstraße 10, 75365 Calw-Stammheim",
-          new Date(2019, 9, 26),
-          2,
-          4,
-          "Macht auf Etepetete, aber wenig dahinter.",
-          new Ratings(5, 4, 3, 4, 0),
-          new Ratings(4, 3, 4, 5, 0)
-        )
-      ],
+      restaurants: [],
       selectedRestaurant: null
     };
   },
@@ -67,13 +33,26 @@ export default {
     saveFileAsNew() {
       saveFile(this.restaurants);
     },
-    loadRestaurantFile(){
-      loadFile().then((newData) => {
-        this.restaurants = newData;
+    loadRestaurantFile() {
+      loadFile().then(newData => {
+        let newRestaurants = [];
+        newData.forEach(loadedRestaurant => {
+          let newRestaurant = new Restaurant();
+          newRestaurant.unpackLoadedRestaurant(loadedRestaurant);
+          newRestaurants = [...newRestaurants, newRestaurant]; //add restaurant to the array
         });
+        this.restaurants = newRestaurants;
+      });
     },
-    selectRestaurant(id){
-      this.selectedRestaurant = this.restaurants.filter(restaurant => restaurant.id == id)[0];
+    selectRestaurant(id) {
+      this.selectedRestaurant = this.restaurants.filter(
+        restaurant => restaurant.id == id)[0];
+    },
+    addRestaurant(){
+      console.log("creating new Restaurant")
+      var newRestaurant = new Restaurant();
+      this.restaurants.unshift(newRestaurant);
+      this.selectRestaurant(newRestaurant.id);
     }
   }
 };

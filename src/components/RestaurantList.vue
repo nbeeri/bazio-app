@@ -1,6 +1,6 @@
 <template>
   <div id="RestaurantList">
-    <RestaurantListToolbar />
+    <RestaurantListToolbar @add-restaurant="addRestaurant"/>
     <div id="ListArea">
       <div v-for="restaurant in restaurants" :key="restaurant.id">
         <RestaurantEntry v-bind:restaurant="restaurant" @restaurant-selected="selectRestaurant"/>
@@ -24,6 +24,11 @@ export default {
   methods: {
     selectRestaurant(id) {
       this.$emit("restaurant-selected", id);
+    },
+    addRestaurant(){
+      console.log("(1)Emitting from RestaurantList.")
+      this.$emit("add-restaurant");
+      console.log("(2)Emitted from RestaurantList.")
     }
   }
 };
