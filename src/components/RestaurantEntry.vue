@@ -3,12 +3,14 @@
     <p class="restaurantTitle">{{restaurant.name}}</p>
     <div class="entryInfo">
       <div class="left">
-        <p class="restaurantDesc">{{restaurant.category}}</p>
-        <p class="restaurantDesc">{{restaurant.resultingRatings.finalRating | round}} Punkte</p>
+        <p v-if="restaurant.category" class="restaurantDesc">{{restaurant.category}}</p>
+        <br v-else />
+        <p class="restaurantDesc">{{restaurant.resultingRatings.finalRating.value | round}} Punkte</p>
       </div>
       <div class="right">
-        <p class="restaurantDesc">Getestet am WIP</p>
-        <p class="restaurantDesc">Bearbeitet am WIP</p>
+        <p v-if="restaurant.reviewDate" class="restaurantDesc">Getestet am {{restaurant.reviewDate}}</p>
+        <br v-else />
+        <p class="restaurantDesc">Bearbeitet am {{restaurant.lastEdited | date}}</p>
       </div>
     </div>
   </div>
@@ -26,6 +28,12 @@ export default {
   filters: {
   round: function (value) {
     return value.toFixed(1);
+  },
+  date: function (date) {
+    var dd = date.getDate().toString().padStart(2, "0");
+    var mm = (date.getMonth() + 1).toString().padStart(2, "0");
+    var yy = date.getFullYear().toString().padStart(2, "0");
+    return `${dd}.${mm}.${yy}`
   }
 }
 };

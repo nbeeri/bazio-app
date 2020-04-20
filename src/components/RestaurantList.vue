@@ -2,12 +2,10 @@
   <div id="RestaurantList">
     <RestaurantListToolbar @add-restaurant="addRestaurant"/>
     <div id="ListArea">
-      <div v-for="restaurant in restaurants" :key="restaurant.id">
+      <div class="entryContainer" :class="{selected: restaurant.id == selectedRestaurant.id}" v-for="restaurant in restaurants" :key="restaurant.id">
         <RestaurantEntry v-bind:restaurant="restaurant" @restaurant-selected="selectRestaurant"/>
       </div>
-
     </div>
-
   </div>
 </template>
 
@@ -16,7 +14,7 @@ import RestaurantListToolbar from "./RestaurantListToolbar"
 import RestaurantEntry from "./RestaurantEntry"
 export default {
   name: "RestaurantList",
-  props: ["restaurants"],
+  props: ["restaurants", "selectedRestaurant"],
   components: {
     RestaurantListToolbar,
     RestaurantEntry
@@ -26,9 +24,7 @@ export default {
       this.$emit("restaurant-selected", id);
     },
     addRestaurant(){
-      console.log("(1)Emitting from RestaurantList.")
       this.$emit("add-restaurant");
-      console.log("(2)Emitted from RestaurantList.")
     }
   }
 };
@@ -64,6 +60,18 @@ export default {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #8A8A8A;
+}
+.entryContainer{
+  transition: border-width 0.2s, background-color 0.2s;
+  border-left: 0px solid #3d77f5;
+}
+
+.entryContainer:hover{
+  background-color: #9999992c;
+}
+.selected {
+  border-left-width: 12px;
+  background-color: #3d77f52c !important;
 }
 
 </style>

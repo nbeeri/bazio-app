@@ -2,7 +2,7 @@
   <div id="app">
     <Toolbar v-on:save-file-as-new="saveFileAsNew" v-on:load-file="loadRestaurantFile" />
     <div id="mainArea">
-      <RestaurantList v-bind:restaurants="restaurants" @restaurant-selected="selectRestaurant" @add-restaurant="addRestaurant"/>
+      <RestaurantList v-bind:restaurants="restaurants" v-bind:selectedRestaurant="selectedRestaurant" @restaurant-selected="selectRestaurant" @add-restaurant="addRestaurant"/>
       <Editor v-bind:selectedRestaurant="selectedRestaurant" />
     </div>
   </div>
@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       restaurants: [],
-      selectedRestaurant: null
+      selectedRestaurant: {id: null} //placeholder
     };
   },
   methods: {
@@ -49,7 +49,6 @@ export default {
         restaurant => restaurant.id == id)[0];
     },
     addRestaurant(){
-      console.log("creating new Restaurant")
       var newRestaurant = new Restaurant();
       this.restaurants.unshift(newRestaurant);
       this.selectRestaurant(newRestaurant.id);
@@ -107,5 +106,9 @@ button:active {
 }
 button:focus {
   outline: none;
+}
+.ButtonIcon{
+  height: 1.3em;
+  margin-right: 0.5em;
 }
 </style>

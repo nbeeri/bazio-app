@@ -1,10 +1,10 @@
 <template>
   <div id="RestaurantListToolbar">
     <button @click="addRestaurant">
-      <img src="../assets/icons/Add.svg" alt />Hinzufügen
+      <img class="ButtonIcon" src="../assets/icons/Add.svg" />Hinzufügen
     </button>
     <button>
-      <img src="../assets/icons/Sort.svg" alt />Sortieren
+      <img class="ButtonIcon" src="../assets/icons/Sort.svg" />Sortieren
     </button>
   </div>
 </template>
@@ -14,9 +14,7 @@ export default {
   name: "RestaurantListToolbar",
   methods: {
     addRestaurant(){
-      console.log("(1)Emitting from RestaurantListToolbar.")
       this.$emit("add-restaurant");
-      console.log("(2)Emitted from RestaurantListToolbar.")
     }
   }
 };
@@ -26,10 +24,6 @@ export default {
 #RestaurantListToolbar {
   background: #2A56B9;
   display: flex;
-}
-img {
-  height: 1.2em;
-  margin-right: 0.5em;
 }
 button {
   margin: 0 0.5em;
