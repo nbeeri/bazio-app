@@ -1,7 +1,7 @@
 <template>
   <div id="Editor">
     <div id="EditorToolbar">
-      <button v-if="selectedRestaurant.id">
+      <button v-if="selectedRestaurant.id" @click="deleteRestaurant">
         <img class="ButtonIcon" src="../assets/icons/Delete.svg" alt />Löschen
       </button>
     </div>
@@ -162,6 +162,9 @@ export default {
   methods: {
     updateRatings() {
       this.selectedRestaurant.updateFinalRatings();
+    },
+    deleteRestaurant() {
+      this.$emit("delete-restaurant");
     }
   }
 };

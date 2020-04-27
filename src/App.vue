@@ -1,9 +1,14 @@
 <template>
   <div id="app">
-    <Toolbar v-on:save-file-as-new="saveFileAsNew" v-on:load-file="loadRestaurantFile" />
+    <Toolbar @save-file-as-new="saveFileAsNew" @load-file="loadRestaurantFile" />
     <div id="mainArea">
-      <RestaurantList v-bind:restaurants="restaurants" v-bind:selectedRestaurant="selectedRestaurant" @restaurant-selected="selectRestaurant" @add-restaurant="addRestaurant"/>
-      <Editor v-bind:selectedRestaurant="selectedRestaurant" />
+      <RestaurantList
+        v-bind:restaurants="restaurants"
+        v-bind:selectedRestaurant="selectedRestaurant"
+        @restaurant-selected="selectRestaurant"
+        @add-restaurant="addRestaurant"
+      />
+      <Editor v-bind:selectedRestaurant="selectedRestaurant" @delete-restaurant="deleteRestaurant" />
     </div>
   </div>
 </template>
@@ -26,7 +31,7 @@ export default {
   data() {
     return {
       restaurants: [],
-      selectedRestaurant: {id: null} //placeholder
+      selectedRestaurant: { id: null } //placeholder
     };
   },
   methods: {
@@ -42,16 +47,26 @@ export default {
           newRestaurants = [...newRestaurants, newRestaurant]; //add restaurant to the array
         });
         this.restaurants = newRestaurants;
+        this.selectedRestaurant = this.restaurants[0];
       });
     },
     selectRestaurant(id) {
       this.selectedRestaurant = this.restaurants.filter(
-        restaurant => restaurant.id == id)[0];
+        restaurant => restaurant.id == id
+      )[0];
     },
-    addRestaurant(){
+    addRestaurant() {
       var newRestaurant = new Restaurant();
       this.restaurants.unshift(newRestaurant);
       this.selectRestaurant(newRestaurant.id);
+    },
+    deleteRestaurant() {
+      this.restaurants = this.restaurants.filter(
+        restaurant => restaurant.id != this.selectedRestaurant.id
+      );
+      this.selectedRestaurant = this.restaurants[0]
+        ? this.restaurants[0]
+        : { id: null };
     }
   }
 };
@@ -107,7 +122,7 @@ button:active {
 button:focus {
   outline: none;
 }
-.ButtonIcon{
+.ButtonIcon {
   height: 1.3em;
   margin-right: 0.5em;
 }
