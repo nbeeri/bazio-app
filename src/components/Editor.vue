@@ -16,7 +16,7 @@
         <label for="Address">Adresse</label>
         <input v-model="selectedRestaurant.address" type="text" id="Address" />
 
-        <label for="Date">Getestet am</label>
+        <label for="Date" @blur="formatDate">Getestet am</label>
         <input v-model="selectedRestaurant.reviewDate" type="text" id="Date" />
 
         <label for="Time">Tageszeit</label>
@@ -134,7 +134,10 @@
         />
         <div class="CategoryResult">{{selectedRestaurant.resultingRatings.bonus.value}}</div>
         <div id="FinalResultBox">Endpunktzahl:</div>
-        <div v-bind:class ="{Perfect: perfectScore}" id="FinalResult">{{selectedRestaurant.resultingRatings.finalRating.value}}</div>
+        <div
+          v-bind:class="{Perfect: perfectScore}"
+          id="FinalResult"
+        >{{selectedRestaurant.resultingRatings.finalRating.value}}</div>
       </div>
     </div>
     <div class="NoRestaurant" v-else>
@@ -156,15 +159,20 @@ export default {
   },
   computed: {
     perfectScore() {
-      return this.selectedRestaurant.resultingRatings.finalRating.value >= 10;
+      return this.selectedRestaurant.resultingRatings.finalRating.value >= 10; //returns true if the total score is at least 10
     }
   },
   methods: {
     updateRatings() {
       this.selectedRestaurant.updateFinalRatings();
     },
+
     deleteRestaurant() {
       this.$emit("delete-restaurant");
+    },
+
+    formatDate() {
+      
     }
   }
 };
@@ -195,10 +203,12 @@ export default {
 button {
   margin: 0 0.5em;
 }
+
 label {
   color: #2a56b9;
   margin: 0.6em 0.2em 0.2em 0;
 }
+
 input {
   outline: none;
   border: 1.5px solid #2a56b9;
@@ -299,7 +309,7 @@ textarea {
   padding-bottom: 0.1em;
 }
 
-.Perfect{
+.Perfect {
   background-color: goldenrod !important;
 }
 </style>
