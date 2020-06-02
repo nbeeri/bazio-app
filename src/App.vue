@@ -1,12 +1,17 @@
 <template>
   <div id="app">
-    <Toolbar @save-file-as-new="saveFileAsNew" @load-file="loadRestaurantFile" @export-file="exportRestaurantFile" />
+    <Toolbar
+      @save-file-as-new="saveFileAsNew"
+      @load-file="loadRestaurantFile"
+      @export-file="exportRestaurantFile"
+    />
     <div id="mainArea">
       <RestaurantList
         v-bind:restaurants="restaurants"
         v-bind:selectedRestaurant="selectedRestaurant"
         @restaurant-selected="selectRestaurant"
         @add-restaurant="addRestaurant"
+        @sort-restaurants="sortRestaurants"
       />
       <Editor v-bind:selectedRestaurant="selectedRestaurant" @delete-restaurant="deleteRestaurant" />
     </div>
@@ -15,7 +20,6 @@
 
 <script>
 import Restaurant from "./classes/Restaurant";
-//import Ratings from "./classes/Ratings";
 import Toolbar from "./components/Toolbar";
 import RestaurantList from "./components/RestaurantList";
 import Editor from "./components/Editor";
@@ -70,6 +74,11 @@ export default {
     },
     exportRestaurantFile() {
       exportCSV(this.restaurants);
+    },
+    sortRestaurants() {
+      this.restaurants.sort((a, b) => {
+        return a.reviewDate.getTime() - b.reviewDate.getTime();
+      });
     }
   }
 };

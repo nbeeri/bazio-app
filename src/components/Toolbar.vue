@@ -1,11 +1,11 @@
 <template>
   <div id="toolbar">
-    <button>
+    <!--<button v-on:click="$emit('new-file')">
       <img class="ButtonIcon" src="../assets/icons/NewFile.svg" />Neu
     </button>
     <button>
       <img class="ButtonIcon" src="../assets/icons/SaveFile.svg" />Speichern
-    </button>
+    </button>-->
     <button v-on:click="$emit('save-file-as-new')">
       <img class="ButtonIcon" src="../assets/icons/SaveAsNewFile.svg" />Speichern unter
     </button>
@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: "Toolbar",
+  name: "Toolbar"
 };
 </script>
 

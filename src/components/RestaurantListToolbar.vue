@@ -1,9 +1,9 @@
 <template>
   <div id="RestaurantListToolbar">
-    <button @click="addRestaurant">
+    <button @click="$emit('add-restaurant')">
       <img class="ButtonIcon" src="../assets/icons/Add.svg" />Hinzufügen
     </button>
-    <button>
+    <button @click="$emit('sort-restaurants')">
       <img class="ButtonIcon" src="../assets/icons/Sort.svg" />Sortieren
     </button>
   </div>
@@ -11,12 +11,7 @@
 
 <script>
 export default {
-  name: "RestaurantListToolbar",
-  methods: {
-    addRestaurant(){
-      this.$emit("add-restaurant");
-    }
-  }
+  name: "RestaurantListToolbar"
 };
 </script>
 

@@ -1,5 +1,5 @@
 const { dialog } = require('electron').remote;
-var fs = require('fs');
+const fs = require('fs');
 
 export function loadFile() {
     return new Promise((resolve, reject) => {
