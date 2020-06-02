@@ -7,10 +7,13 @@
       <img class="ButtonIcon" src="../assets/icons/SaveFile.svg" />Speichern
     </button>
     <button v-on:click="$emit('save-file-as-new')">
-      <img class="ButtonIcon" src="../assets/icons/SaveAsNewFile.svg" />Speichern unter...
+      <img class="ButtonIcon" src="../assets/icons/SaveAsNewFile.svg" />Speichern unter
     </button>
     <button v-on:click="$emit('load-file')">
       <img class="ButtonIcon" src="../assets/icons/LoadFile.svg" />Öffnen
+    </button>
+    <button v-on:click="$emit('export-file')">
+      <img class="ButtonIcon" src="../assets/icons/ExportFile.svg" />Exportieren
     </button>
   </div>
 </template>

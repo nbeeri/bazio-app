@@ -8,7 +8,7 @@
         <p class="restaurantDesc">{{restaurant.resultingRatings.finalRating.value | round}} Punkte</p>
       </div>
       <div class="right">
-        <p v-if="restaurant.reviewDate" class="restaurantDesc">Getestet am {{restaurant.reviewDate}}</p>
+        <p v-if="restaurant.reviewDateDisplay" class="restaurantDesc">Getestet am {{restaurant.reviewDateDisplay}}</p>
         <br v-else />
         <p class="restaurantDesc">Bearbeitet am {{restaurant.lastEdited | date}}</p>
       </div>

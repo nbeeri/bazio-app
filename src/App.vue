@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Toolbar @save-file-as-new="saveFileAsNew" @load-file="loadRestaurantFile" />
+    <Toolbar @save-file-as-new="saveFileAsNew" @load-file="loadRestaurantFile" @export-file="exportRestaurantFile" />
     <div id="mainArea">
       <RestaurantList
         v-bind:restaurants="restaurants"
@@ -19,7 +19,7 @@ import Restaurant from "./classes/Restaurant";
 import Toolbar from "./components/Toolbar";
 import RestaurantList from "./components/RestaurantList";
 import Editor from "./components/Editor";
-import { saveFile, loadFile } from "./classes/FileManager.js";
+import { saveFile, loadFile, exportCSV } from "./classes/FileManager.js";
 
 export default {
   name: "App",
@@ -67,6 +67,9 @@ export default {
       this.selectedRestaurant = this.restaurants[0]
         ? this.restaurants[0]
         : { id: null };
+    },
+    exportRestaurantFile() {
+      exportCSV(this.restaurants);
     }
   }
 };

@@ -13,6 +13,7 @@
   },
   "main": "background.js",
   "dependencies": {
+    "@vue/cli": "^4.4.1",
     "core-js": "^3.6.4",
     "uuid": "^3.4.0",
     "vue": "^2.6.11"

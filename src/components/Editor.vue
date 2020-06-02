@@ -16,8 +16,14 @@
         <label for="Address">Adresse</label>
         <input v-model="selectedRestaurant.address" type="text" id="Address" />
 
-        <label for="Date" @blur="formatDate">Getestet am</label>
-        <input v-model="selectedRestaurant.reviewDate" type="text" id="Date" />
+        <label for="Date">Getestet am</label>
+        <input
+          v-model="selectedRestaurant.reviewDateDisplay"
+          type="text"
+          id="Date"
+          @blur="updateReviewDate"
+          v-bind:class="{DateError: selectedRestaurant.dateError}"
+        />
 
         <label for="Time">Tageszeit</label>
         <select v-model="selectedRestaurant.reviewTime" id="Time">
@@ -27,7 +33,17 @@
         </select>
 
         <label for="Price">Preisklasse</label>
-        <input v-model="selectedRestaurant.price" type="range" min="1" max="3" step="0.5" id="Date" />
+        <div id="PriceInputArea">
+          <input
+            v-model="selectedRestaurant.price"
+            type="range"
+            min="1"
+            max="3"
+            step="0.5"
+            id="Price"
+          />
+          <div id="PriceDisplay">{{priceIndicator}}</div>
+        </div>
 
         <label for="Comment">Anmerkungen</label>
         <textarea
@@ -80,23 +96,23 @@
         />
         <div class="CategoryResult">{{selectedRestaurant.resultingRatings.service.value}}</div>
 
-        <!--VALUE-->
+        <!--PRICEVALUE-->
         <div class="IconBox">
           <img class="RatingIcon" src="../assets/icons/Value.svg" alt />
         </div>
         <PointCounter
-          :rating="selectedRestaurant.ratings1.value"
+          :rating="selectedRestaurant.ratings1.priceValue"
           :min="0"
           :max="10"
           @rating-updated="updateRatings"
         />
         <PointCounter
-          :rating="selectedRestaurant.ratings2.value"
+          :rating="selectedRestaurant.ratings2.priceValue"
           :min="0"
           :max="10"
           @rating-updated="updateRatings"
         />
-        <div class="CategoryResult">{{selectedRestaurant.resultingRatings.value.value}}</div>
+        <div class="CategoryResult">{{selectedRestaurant.resultingRatings.priceValue.value}}</div>
 
         <!--AMBIENCE-->
         <div class="IconBox">
@@ -160,6 +176,9 @@ export default {
   computed: {
     perfectScore() {
       return this.selectedRestaurant.resultingRatings.finalRating.value >= 10; //returns true if the total score is at least 10
+    },
+    priceIndicator() {
+      return this.selectedRestaurant.getPriceIndicatorString();
     }
   },
   methods: {
@@ -171,8 +190,17 @@ export default {
       this.$emit("delete-restaurant");
     },
 
-    formatDate() {
-      
+    updateReviewDate() {
+      try {
+        this.selectedRestaurant.setReviewDate(
+          this.selectedRestaurant.reviewDateDisplay
+        );
+        this.selectedRestaurant.dateError = false;
+      } catch {
+        this.selectedRestaurant.dateError = true;
+      } finally {
+        this.selectedRestaurant.reviewDateDisplay = this.selectedRestaurant.getReviewDateString();
+      }
     }
   }
 };
@@ -311,5 +339,24 @@ textarea {
 
 .Perfect {
   background-color: goldenrod !important;
+}
+
+.DateError {
+  border-color: rgb(184, 0, 0);
+}
+#PriceInputArea {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+#Price {
+  flex-grow: 1;
+}
+#PriceDisplay {
+  width: 6em;
+  text-align: center;
+  font-weight: bold;
+  font-size: 150%;
+  color: #2a56b9;
 }
 </style>
